@@ -1,4 +1,5 @@
 # coding:utf-8
+import re
 import unittest
 
 try:
@@ -25,11 +26,10 @@ class TestConcentDice(unittest.TestCase):
                 self.assertTrue(result)
 
     def test_dice_split(self):
-        import re
         for i in range(100):
             strd6s = self.d.dice_split(3, 6)
             check = r"\[ \d+, \d+, \d+ \] = \d+"
-            result = re.fullmatch(check, strd6s)
+            result = bool(re.fullmatch(check, strd6s))
             self.assertTrue(result)
 
     def test_swdice(self):
@@ -37,6 +37,20 @@ class TestConcentDice(unittest.TestCase):
         for i in range(100):
             d6s = swd.dice()
             result = d6s is not None
+            self.assertTrue(result)
+
+    def test_run_dice_split(self):
+        for i in range(100):
+            strd6s = self.d.run("2d6")
+            check = r"\[ \d+, \d+ \] = \d+"
+            result = bool(re.fullmatch(check, strd6s))
+            self.assertTrue(result)
+
+    def test_run_choice(self):
+        for i in range(100):
+            strd6s = self.d.run("ch a b c")
+            check = r"\[abc\]"
+            result = bool(re.fullmatch(check, strd6s))
             self.assertTrue(result)
 
     def test_(self):

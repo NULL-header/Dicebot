@@ -1,5 +1,6 @@
 # encoding:utf-8
 import random
+import re
 
 
 class concentdice(object):
@@ -23,4 +24,11 @@ class concentdice(object):
 
     def swdice(self):
         from dice_sw import SwDice
-        return True
+        return SwDice()
+
+    def run(self, msg):
+        if re.fullmatch(r"\d+d\d+", msg):
+            rolls, limit = map(int, msg.split("d"))
+            return self.dice_split(rolls, limit)
+
+        return "a"
