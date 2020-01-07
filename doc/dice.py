@@ -3,20 +3,24 @@ import random
 
 
 class concentdice(object):
-    def ndice(rolls: int, limit: int):
-        return [dice(limit) for r in range(rolls)]
+    def ndice(self, rolls: int, limit: int):
+        return [self.dice(limit) for r in range(rolls)]
 
-    def dice(limit: int):
+    def dice(self, limit: int):
         return random.randint(1, limit)
 
-    def dice_split(rolls: int, limit: int):
+    def dice_split(self, rolls: int, limit: int):
         result = "[ "
-        n = ndice(rolls, limit)
+        n = self.ndice(rolls, limit)
         for i in n:
             result += str(i) + ", "
-            result += "] = "
+        result = result[:-2] + " " + "] = "
         sum = 0
         for i in n:
             sum += i
         result += str(sum)
         return result
+
+    def swdice(self):
+        from dice_sw import SwDice
+        return True
