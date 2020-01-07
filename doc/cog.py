@@ -10,13 +10,16 @@ class Cmds(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, msg):
+        text = ""
         if msg.author.bot:
             return
+        text += msg.author.mention + "\n"
         try:
             rolls, limit = map(int, msg.content.split("d"))
-            await msg.channel.send(dice_split(rolls, limit))
+            text += concentdice.dice_split(rolls, limit)
         finally:
             pass
+        await msg.channel.send(text)
 
 
 def setup(bot):
