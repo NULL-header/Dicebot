@@ -30,5 +30,6 @@ class concentdice(object):
         if re.fullmatch(r"\d+d\d+", msg):
             rolls, limit = map(int, msg.split("d"))
             return self.dice_split(rolls, limit)
-
+        if re.search("^ch ", msg):
+            return random.choice(msg[3:].split(" "))
         return "a"

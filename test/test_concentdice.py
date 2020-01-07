@@ -49,7 +49,7 @@ class TestConcentDice(unittest.TestCase):
     def test_run_choice(self):
         for i in range(100):
             strd6s = self.d.run("ch a b c")
-            check = r"\[abc\]"
+            check = r"[abc]"
             result = bool(re.fullmatch(check, strd6s))
             self.assertTrue(result)
 
