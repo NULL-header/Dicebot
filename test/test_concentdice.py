@@ -48,9 +48,7 @@ class TestConcentDice(unittest.TestCase):
 
     def test_swdice(self):
         swd = self.d.swdice()
-        d6s = swd.swdice()
-        result = d6s is not None
-        self.assertTrue(result)
+        self.assertEqual("sw", swd.dicemode)
 
     def test_run_dice_split(self):
         for i in range(100):
