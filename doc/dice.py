@@ -8,6 +8,8 @@ class concentdice(object):
         return [self.dice(limit) for r in range(rolls)]
 
     def dice(self, limit: int):
+        if limit < 0 or (not isinstance(limit, int)):
+            return None
         return random.randint(1, limit)
 
     def dice_split(self, rolls: int, limit: int):
@@ -31,5 +33,13 @@ class concentdice(object):
             rolls, limit = map(int, msg.split("d"))
             return self.dice_split(rolls, limit)
         if re.search("^ch ", msg):
-            return random.choice(msg[3:].split(" "))
-        return "a"
+            return self.choice(msg[3:].split(" "))
+
+    def choice(self, args):
+        return random.choice(args)
+
+    def set_dice(self, dice: str):
+        self.dice = dice
+
+    def wake(self, msg):
+        pass

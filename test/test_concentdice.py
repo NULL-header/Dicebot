@@ -17,6 +17,9 @@ class TestConcentDice(unittest.TestCase):
             d6 = self.d.dice(6)
             result = 1 <= d6 and d6 <= 6
             self.assertTrue(result)
+        d6 = self.d.dice(-1)
+        result = bool(d6)
+        self.assertFalse(result)
 
     def test_ndice(self):
         for i in range(100):
@@ -34,10 +37,9 @@ class TestConcentDice(unittest.TestCase):
 
     def test_swdice(self):
         swd = self.d.swdice()
-        for i in range(100):
-            d6s = swd.dice()
-            result = d6s is not None
-            self.assertTrue(result)
+        d6s = swd.swdice()
+        result = d6s is not None
+        self.assertTrue(result)
 
     def test_run_dice_split(self):
         for i in range(100):
@@ -52,6 +54,15 @@ class TestConcentDice(unittest.TestCase):
             check = r"[abc]"
             result = bool(re.fullmatch(check, strd6s))
             self.assertTrue(result)
+
+    def test_set_dice(self):
+        strd6s = self.d.set_dice("normal")
+        self.assertEqual("normal", self.d.dice)
+
+    def test_wake(self):
+        dice = concentdice()
+        dice.set_dice("normal")
+        strd6s = dice.wake("2d6")
 
     def test_(self):
         pass
