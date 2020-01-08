@@ -4,6 +4,9 @@ import re
 
 
 class concentdice(object):
+    def __init__(self):
+        self.dicemode = "normal"
+
     def ndice(self, rolls: int, limit: int):
         if rolls < 0:
             return None
@@ -46,7 +49,9 @@ class concentdice(object):
         return random.choice(args)
 
     def set_dice(self, dice: str):
-        self.dice = dice
+        self.dicemode = dice
 
     def wake(self, msg):
-        pass
+        if self.dicemode == "normal":
+            dice = self
+        return dice.run(msg)

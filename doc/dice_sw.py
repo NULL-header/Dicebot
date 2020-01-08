@@ -5,5 +5,5 @@ from dice import concentdice
 
 
 class SwDice(concentdice):
-    def swdice(self):
+    def dices(self):
         return [random.randint(1, 6), random.randint(1, 6)]

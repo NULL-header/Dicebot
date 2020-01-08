@@ -68,12 +68,16 @@ class TestConcentDice(unittest.TestCase):
 
     def test_set_dice(self):
         strd6s = self.d.set_dice("normal")
-        self.assertEqual("normal", self.d.dice)
+        self.assertEqual("normal", self.d.dicemode)
 
     def test_wake(self):
         dice = concentdice()
         dice.set_dice("normal")
-        strd6s = dice.wake("2d6")
+        for i in range(100):
+            strd6s = dice.wake("2d6")
+            check = r"\[ \d+, \d+ \] = \d+"
+            result = bool(re.fullmatch(check, strd6s))
+            self.assertTrue(result)
 
     def test_(self):
         pass
