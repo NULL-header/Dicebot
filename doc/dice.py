@@ -5,7 +5,12 @@ import re
 
 class concentdice(object):
     def ndice(self, rolls: int, limit: int):
-        return [self.dice(limit) for r in range(rolls)]
+        if rolls < 0:
+            return None
+        dices = [self.dice(limit) for r in range(rolls)]
+        if None in dices:
+            return None
+        return dices
 
     def dice(self, limit: int):
         if limit < 0 or (not isinstance(limit, int)):

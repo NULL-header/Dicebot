@@ -18,8 +18,7 @@ class TestConcentDice(unittest.TestCase):
             result = 1 <= d6 and d6 <= 6
             self.assertTrue(result)
         d6 = self.d.dice(-1)
-        result = bool(d6)
-        self.assertFalse(result)
+        self.assertEqual(None, d6)
 
     def test_ndice(self):
         for i in range(100):
@@ -27,6 +26,12 @@ class TestConcentDice(unittest.TestCase):
             for j in d6s:
                 result = 1 <= j and j <= 6
                 self.assertTrue(result)
+        d6s = self.d.ndice(-1, 1)
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice(1, -1)
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice(-1, -1)
+        self.assertEqual(d6s, None)
 
     def test_dice_split(self):
         for i in range(100):
