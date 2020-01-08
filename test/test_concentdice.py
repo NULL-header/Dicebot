@@ -39,6 +39,12 @@ class TestConcentDice(unittest.TestCase):
             check = r"\[ \d+, \d+, \d+ \] = \d+"
             result = bool(re.fullmatch(check, strd6s))
             self.assertTrue(result)
+        strd6s = self.d.dice_split(-1, 1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(1, -1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(-1, -1)
+        self.assertEqual(None, strd6s)
 
     def test_swdice(self):
         swd = self.d.swdice()

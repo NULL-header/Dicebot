@@ -20,6 +20,8 @@ class concentdice(object):
     def dice_split(self, rolls: int, limit: int):
         result = "[ "
         n = self.ndice(rolls, limit)
+        if not n:
+            return None
         for i in n:
             result += str(i) + ", "
         result = result[:-2] + " " + "] = "
