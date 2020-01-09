@@ -134,7 +134,9 @@ class TestConcentDice(unittest.TestCase):
         self.assertEqual(self.d.run("ch "), None)
 
     def test_set_dice(self):
-        strd6s = self.d.set_dice("normal")
+        result = self.d.set_dice("normal")
+        self.assertEqual("normal", self.d.dicemode)
+        result = self.d.set_dice("aaa")
         self.assertEqual("normal", self.d.dicemode)
 
     def test_wake(self):
