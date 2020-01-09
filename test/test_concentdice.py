@@ -107,11 +107,25 @@ class TestConcentDice(unittest.TestCase):
             result = bool(re.fullmatch(check, strd6s))
             self.assertTrue(result)
 
+    def test_choice_random(self):
+        choose = self.d.choice_random(["a", "b", "c"])
+        check = r"[abc]"
+        result = bool(re.fullmatch(check, choose))
+        self.assertTrue(result)
+        self.assertEqual(self.d.choice_random([1, "b"]), None)
+        self.assertEqual(self.d.choice_random(1), None)
+
+    def test_choice(self):
+        choose = self.d.choice(["a", "b", "c"])
+        check = r"\[ \w+, \w+, \w+ \] = \w+"
+        result = bool(re.fullmatch(check, choose))
+        self.assertTrue(result)
+
     def test_run_choice(self):
         for i in range(100):
-            strd6s = self.d.run("ch a b c")
-            check = r"[abc]"
-            result = bool(re.fullmatch(check, strd6s))
+            choose = self.d.run("ch a b c")
+            check = r"\[ \w+, \w+, \w+ \] = \w+"
+            result = bool(re.fullmatch(check, choose))
             self.assertTrue(result)
 
     def test_set_dice(self):

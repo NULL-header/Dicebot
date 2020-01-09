@@ -45,8 +45,21 @@ class concentdice(object):
         if re.search("^ch ", msg):
             return self.choice(msg[3:].split(" "))
 
-    def choice(self, args):
+    def choice_random(self, args):
+        if not isinstance(args, list):
+            return None
+        for i in args:
+            if not isinstance(i, str):
+                return None
         return random.choice(args)
+
+    def choice(self, args):
+        arg_random = self.choice_random(args)
+        result = "[ "
+        for i in args:
+            result += i + ", "
+        result = result[:-2] + " ] = " + arg_random
+        return result
 
     def set_dice(self, dice: str):
         self.dicemode = dice
