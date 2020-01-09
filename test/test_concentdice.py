@@ -23,6 +23,10 @@ class TestConcentDice(unittest.TestCase):
         self.assertEqual(None, d6)
         d6 = self.d.dice("a")
         self.assertEqual(None, d6)
+        d6 = self.d.dice(None)
+        self.assertEqual(None, d6)
+        d6 = self.d.dice(0)
+        self.assertEqual(None, d6)
 
     def test_ndice(self):
         for i in range(100):
@@ -42,6 +46,18 @@ class TestConcentDice(unittest.TestCase):
         self.assertEqual(d6s, None)
         d6s = self.d.ndice(0.1, 0.1)
         self.assertEqual(d6s, None)
+        d6s = self.d.ndice(1, "a")
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice("a", 1)
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice("a", "a")
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice(1, 0)
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice(0, 1)
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice(0, 0)
+        self.assertEqual(d6s, None)
 
     def test_dice_split(self):
         for i in range(100):
@@ -60,6 +76,24 @@ class TestConcentDice(unittest.TestCase):
         strd6s = self.d.dice_split(1, 0.1)
         self.assertEqual(None, strd6s)
         strd6s = self.d.dice_split(0.1, 0.1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(1, "a")
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split("a", 1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split("a", "a")
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(1, None)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(None, 1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(None, None)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(1, 0)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(0, 1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(0, 0)
         self.assertEqual(None, strd6s)
 
     def test_swdice(self):

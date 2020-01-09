@@ -8,7 +8,7 @@ class concentdice(object):
         self.dicemode = "normal"
 
     def ndice(self, rolls: int, limit: int):
-        if (not isinstance(rolls, int)) or rolls < 0:
+        if (not isinstance(rolls, int)) or rolls <= 0:
             return None
         dices = [self.dice(limit) for r in range(rolls)]
         if None in dices:
@@ -16,7 +16,7 @@ class concentdice(object):
         return dices
 
     def dice(self, limit: int):
-        if (not isinstance(limit, int)) or limit < 0:
+        if (not isinstance(limit, int)) or limit <= 0:
             return None
         return random.randint(1, limit)
 
