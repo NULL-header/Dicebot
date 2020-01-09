@@ -19,6 +19,10 @@ class TestConcentDice(unittest.TestCase):
             self.assertTrue(result)
         d6 = self.d.dice(-1)
         self.assertEqual(None, d6)
+        d6 = self.d.dice(0.1)
+        self.assertEqual(None, d6)
+        d6 = self.d.dice("a")
+        self.assertEqual(None, d6)
 
     def test_ndice(self):
         for i in range(100):
@@ -32,6 +36,12 @@ class TestConcentDice(unittest.TestCase):
         self.assertEqual(d6s, None)
         d6s = self.d.ndice(-1, -1)
         self.assertEqual(d6s, None)
+        d6s = self.d.ndice(0.1, 1)
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice(1, 0.1)
+        self.assertEqual(d6s, None)
+        d6s = self.d.ndice(0.1, 0.1)
+        self.assertEqual(d6s, None)
 
     def test_dice_split(self):
         for i in range(100):
@@ -44,6 +54,12 @@ class TestConcentDice(unittest.TestCase):
         strd6s = self.d.dice_split(1, -1)
         self.assertEqual(None, strd6s)
         strd6s = self.d.dice_split(-1, -1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(0.1, 1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(1, 0.1)
+        self.assertEqual(None, strd6s)
+        strd6s = self.d.dice_split(0.1, 0.1)
         self.assertEqual(None, strd6s)
 
     def test_swdice(self):
