@@ -114,12 +114,15 @@ class TestConcentDice(unittest.TestCase):
         self.assertTrue(result)
         self.assertEqual(self.d.choice_random([1, "b"]), None)
         self.assertEqual(self.d.choice_random(1), None)
+        self.assertEqual(self.d.choice_random([]), None)
 
     def test_choice(self):
         choose = self.d.choice(["a", "b", "c"])
         check = r"\[ \w+, \w+, \w+ \] = \w+"
         result = bool(re.fullmatch(check, choose))
         self.assertTrue(result)
+        self.assertEqual(self.d.choice([1, "a"]), None)
+        self.assertEqual(self.d.choice(1), None)
 
     def test_run_choice(self):
         for i in range(100):
@@ -127,6 +130,8 @@ class TestConcentDice(unittest.TestCase):
             check = r"\[ \w+, \w+, \w+ \] = \w+"
             result = bool(re.fullmatch(check, choose))
             self.assertTrue(result)
+        self.assertEqual(self.d.run("ch"), None)
+        self.assertEqual(self.d.run("ch "), None)
 
     def test_set_dice(self):
         strd6s = self.d.set_dice("normal")

@@ -44,9 +44,10 @@ class concentdice(object):
             return self.dice_split(rolls, limit)
         if re.search("^ch ", msg):
             return self.choice(msg[3:].split(" "))
+        return None
 
     def choice_random(self, args):
-        if not isinstance(args, list):
+        if not isinstance(args, list) or not args:
             return None
         for i in args:
             if not isinstance(i, str):
@@ -55,6 +56,8 @@ class concentdice(object):
 
     def choice(self, args):
         arg_random = self.choice_random(args)
+        if not arg_random:
+            return None
         result = "[ "
         for i in args:
             result += i + ", "
