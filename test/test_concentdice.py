@@ -133,11 +133,21 @@ class TestConcentDice(unittest.TestCase):
         self.assertEqual(self.d.run("ch"), None)
         self.assertEqual(self.d.run("ch "), None)
 
+    def test_run_error(self):
+        self.assertEqual(self.d.run("aaa"), None)
+        self.assertEqual(self.d.run(1), None)
+        self.assertEqual(self.d.run([]), None)
+
     def test_set_dice(self):
-        result = self.d.set_dice("normal")
-        self.assertEqual("normal", self.d.dicemode)
-        result = self.d.set_dice("aaa")
-        self.assertEqual("normal", self.d.dicemode)
+        dice = concentdice()
+        result = dice.set_dice("normal")
+        self.assertEqual("normal", dice.dicemode)
+        result = dice.set_dice("aaa")
+        self.assertEqual("normal", dice.dicemode)
+        result = dice.set_dice("sw")
+        self.assertEqual("sw", dice.dicemode)
+        result = dice.set_dice(1)
+        self.assertEqual("sw", dice.dicemode)
 
     def test_wake(self):
         dice = concentdice()

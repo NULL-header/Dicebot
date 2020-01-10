@@ -6,6 +6,7 @@ import re
 class concentdice(object):
     def __init__(self):
         self.dicemode = "normal"
+        self.dicemodelist = ["normal", "sw"]
 
     def ndice(self, rolls: int, limit: int):
         if (not isinstance(rolls, int)) or rolls <= 0:
@@ -39,6 +40,8 @@ class concentdice(object):
         return SwDice()
 
     def run(self, msg):
+        if not isinstance(msg, str):
+            return None
         if re.fullmatch(r"\d+d\d+", msg):
             rolls, limit = map(int, msg.split("d"))
             return self.dice_split(rolls, limit)
@@ -65,7 +68,8 @@ class concentdice(object):
         return result
 
     def set_dice(self, dice: str):
-        self.dicemode = dice
+        if dice in self.dicemodelist:
+            self.dicemode = dice
 
     def wake(self, msg):
         if self.dicemode == "normal":
