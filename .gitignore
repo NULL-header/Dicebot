@@ -1,2 +1,3 @@
 /*.bat 
 /.data/ 
+__pycache__
